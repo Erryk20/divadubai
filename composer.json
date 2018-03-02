@@ -1,0 +1,104 @@
+{
+    "name": "yiisoft/yii2-app-basic",
+    "description": "Yii 2 Basic Project Template",
+    "keywords": ["yii2", "framework", "basic", "project template"],
+    "homepage": "http://www.yiiframework.com/",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
+        "forum": "http://www.yiiframework.com/forum/",
+        "wiki": "http://www.yiiframework.com/wiki/",
+        "irc": "irc://irc.freenode.net/yii",
+        "source": "https://github.com/yiisoft/yii2"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "~2.0.5",
+        "yiisoft/yii2-bootstrap": "~2.0.0",
+        "yiisoft/yii2-swiftmailer": "~2.0.0",
+        "johnitvn/yii2-ajaxcrud": "*",
+        "setasign/fpdf": "1.8.1",
+        "setasign/fpdi-fpdf": "1.6.2",
+        "kotchuprik/yii2-sortable-widgets": "dev-master",
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "sadovojav/yii2-image-thumbnail": "dev-master",
+        "kartik-v/yii2-widget-select2": "@dev",
+        "2amigos/yii2-ckeditor-widget": "^1.0@dev",
+        "himiklab/yii2-recaptcha-widget": "*",
+        "yiister/yii2-gentelella": "~1.0",
+        "dmstr/yii2-adminlte-asset": "1.*",
+        "kartik-v/yii2-widget-activeform": "@dev",
+        "kartik-v/yii2-widget-datepicker": "@dev",
+        "kartik-v/yii2-detail-view": "*",
+        "cics/yii2-video-embed-widget": "dev-master",
+        "vova07/yii2-imperavi-widget": "*",
+        "budyaga/yii2-cropper": "*",
+        "bilginnet/yii2-cropper": "dev-master",
+        "demi/cropper": "~1.0",
+        "demi/image": "~1.0",
+        "nonzod/yii2-krumo": "dev-master",
+        "nterms/yii2-pagesize-widget": "*",
+        "kartik-v/yii2-widget-switchinput": "*",
+        "yii2tech/html2pdf": "^1.0@dev",
+        "yii2mod/yii2-image": "*",
+        "asofter/yii2-imperavi-redactor": "*",
+        "zyx/yii2-imperavi-redactor": "*",
+        "miloschuman/yii2-highcharts-widget": "dev-master",
+        "kartik-v/yii2-builder": "@dev"
+    },
+    "require-dev": {
+        "yiisoft/yii2-debug": "~2.0.0",
+        "yiisoft/yii2-gii": "~2.0.0",
+        "yiisoft/yii2-faker": "~2.0.0",
+
+        "codeception/base": "^2.2.3",
+        "codeception/verify": "~0.3.1",
+        "codeception/specify": "~0.4.3"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "fxp-asset":{
+            "installer-paths": {
+                "npm-asset-library": "vendor/npm",
+                "bower-asset-library": "vendor/bower"
+            }
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "yii\\composer\\Installer::postInstall"
+        ],
+        "post-create-project-cmd": [
+            "yii\\composer\\Installer::postCreateProject",
+            "yii\\composer\\Installer::postInstall"
+        ]
+    },
+    "extra": {
+        "yii\\composer\\Installer::postCreateProject": {
+            "setPermission": [
+                {
+                    "runtime": "0777",
+                    "web/assets": "0777",
+                    "yii": "0755"
+                }
+            ]
+        },
+        "yii\\composer\\Installer::postInstall": {
+            "generateCookieValidationKey": [
+                "config/web.php"
+            ]
+        },
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
