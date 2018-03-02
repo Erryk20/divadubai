@@ -1,0 +1,28 @@
+Options -Indexes
+RewriteEngine On
+
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+# Заголовок Cache-Control
+<IfModule mod_headers.c>
+    Header append Cache-Control "no-store, no-cache, must-revalidate"
+</IfModule>
+# 
+## Заголовок Expires
+<IfModule mod_expires.c>
+    ExpiresActive On ExpiresDefault "now"
+</IfModule>
+
+#RewriteRule ^public_html/$ /public_html/index.php [L]
+#RewriteRule ^(.*)$ public_html/$1 [L,QSA]
+#RewriteRule ^.*$ public_html [L]
+
+#php_flag display_errors on
+#php_flag display_startup_errors on
+
+#RewriteEngine On
+#RewriteCond %{SCRIPT_FILENAME} !-f
+#RewriteRule !^public_html(/?|/.+)$ /public_html%{REQUEST_URI} [L]
