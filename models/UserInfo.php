@@ -54,6 +54,8 @@ use app\models\User;
  */
 class UserInfo extends \yii\db\ActiveRecord
 {
+    use \app\traits\TypeVideo;
+
     public $category2_id;
     public $name2;
     public $id2;
@@ -1327,7 +1329,13 @@ class UserInfo extends \yii\db\ActiveRecord
                 "AND ui.`availability` IN ('1', '-1') 
                 AND mc.slug = :action
             "; 
-            $order = "ORDER BY ui.availability DESC, ui.`name` ASC";
+            
+            if($action == 'locations'){
+                $order = "ORDER BY ui.availability DESC, country, city, address, ui.`name` ASC";
+            }else{
+                $order = "ORDER BY ui.availability DESC, ui.`name` ASC";
+            }
+            
         }elseif($action === 'stylists'){
             if($subcategory){$and .= "AND ms.id IN ({$subcategory})";}
             $and .=
@@ -1360,7 +1368,12 @@ class UserInfo extends \yii\db\ActiveRecord
         }elseif(in_array ($action, ['eventsupport', 'entertainer', 'ourwork', 'influencers'])){
             if($subcategory){$and .= "AND ms.id IN ({$subcategory})";}
             $and .= "AND mc.slug = :action"; 
-            $order  = "ORDER BY ui.availability DESC, ui.`name` ASC";
+            
+            if(in_array($action, ['eventsupport', 'entertainer'])){
+                $order  = "ORDER BY ui.availability DESC, us.subcategory_id, ui.`name` ASC";
+            }else{
+                $order  = "ORDER BY ui.availability DESC, ui.`name` ASC";
+            }
         }
         
         return [$and, $order];
@@ -1470,7 +1483,7 @@ class UserInfo extends \yii\db\ActiveRecord
                        END
                     -- )
                     ,
-                    SUM(
+                    -- SUM(
                         CASE 
                             WHEN ms.slug = 'international' THEN 64 
                             WHEN ms.slug = 'model 1' THEN 32 
@@ -1479,8 +1492,8 @@ class UserInfo extends \yii\db\ActiveRecord
                             WHEN ms.slug = 'celebrity' THEN 4
                             WHEN ms.slug = 'direct booking' THEN 2
                             WHEN ms.slug = 'portfolio' THEN 1
-                       END
-                    )
+                        END
+                    -- )
                 ) AS sort
             FROM `user_info` ui
             LEFT JOIN  user_category uc ON uc.info_user_id = ui.id
@@ -1503,9 +1516,17 @@ class UserInfo extends \yii\db\ActiveRecord
         $params[':actionOld'] = $actionOld;  
         $params[':gender'] = $gender;  
         $params[':action'] = $action;  
-        $params[':name'] = "%$filter->name%";  
-            
-        return Yii::$app->db->createCommand($query, $params)->queryAll(); 
+        $params[':name'] = "%$filter->name%";
+        
+        $items = Yii::$app->db->createCommand($query, $params)->queryAll(); 
+        
+        if($action == 'director'){
+            foreach ($items as &$value) {
+                $value['type'] = self::getTypeVideo($value['logo'])['type'];
+            }
+        }
+        
+        return $items;
     }
     
     

@@ -39,13 +39,16 @@ class Profile extends ViewAction {
         $filterS = $session->get('filter');
        
         $nextPrev = \app\models\UserInfo::NextPrev($this->id, $this->action, $items, "{$this->urlCat}-profile", $filterS);
+
+        $renderFile = ($request->get('action') != 'director') ? 'profile' : 'profile-director';
         
-        return $controller->render('@app/actions/views/profile/profile', [
+        return $controller->render("@app/actions/views/profile/{$renderFile}", [
             'title'=> $this->title,
             'model' => $model,
             'list' => $list,
             'nextPrev' => $nextPrev,
             'pre_url' => Url::toRoute([$this->urlCat, 'action'=>$this->action]),
         ]);
+        
     }
 }

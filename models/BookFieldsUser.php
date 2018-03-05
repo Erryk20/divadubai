@@ -65,11 +65,12 @@ class BookFieldsUser extends \yii\db\ActiveRecord
     
     public static function getFieldsUser($id) {
         $query = "
-            SELECT bf.label, bfu.`value`, bfu.viewed
-            FROM book_fields_user bfu
-            LEFT JOIN book_fields bf ON bf.id = bfu.book_fields_id
-            WHERE id_field = :id
-            ORDER BY `order`
+            SELECT b.title, u.`book_fields_id`, bf.label, u.`value`, u.viewed
+            FROM `book_fields_user` u 
+            LEFT JOIN `book_fields` bf ON bf.id = u.`book_fields_id`
+            LEFT JOIN `book` b ON b.id = bf.book_id
+            WHERE u.id_field = :id
+            ORDER BY bf.order ASC
         ";
 
         return \Yii::$app->db->createCommand($query, [

@@ -323,9 +323,9 @@ var temp;
 
     
     // size of image
-    if($('.view_directors').length != 0 || $('.view_about').length != 0){
+    if($('.view_about').length != 0){
         var sizeArr = [];
-        $('.view_directors .col:first-child .video_youtube img').livequery(function(e){
+        $('.view_directors:not(.view_directors-inner) .col:first-child .video_youtube img').livequery(function(e){
             var imgH = $(this).height();
             var imgW = $(this).width();
             sizeArr.push(imgH);
@@ -344,8 +344,8 @@ var temp;
     }
 
     // video play
-    if($('.video_youtube').length != 0){
-        $('.video_youtube').livequery('click', function(e){
+    if($('.video_youtube:not(.video_youtube-inner)').length != 0){
+        $('.video_youtube:not(.video_youtube-inner)').livequery('click', function(e){
             var vid = $(this).attr('data-video');
             $(this).removeClass('pause');
             $(this).find('iframe').remove();
@@ -997,6 +997,24 @@ var temp;
           }, 100);
           e.preventDefault();
       });
+
+    $('.view_directors').livequery(function(){
+      setTimeout(function(){
+        $('.ajax-progress').remove();
+      }, 500);
+    });
+
+    $('.view_directors-inner .col .popup_click').livequery('click', function(){
+      // alert();
+      var videoId = $(this).parents('.col').find('.video_youtube-inner').data('video');
+      $('.director_iframe_content iframe').remove();
+      $('.director_iframe_content').append('<iframe src="https://www.youtube.com/embed/'+videoId+'?autoplay=1&rel=0" frameborder="0" allowfullscreen></iframe>');
+      $('.director_popup').addClass('active');
+    });
+    $('.director_popup .close').livequery('click', function(){
+      $('.director_popup').removeClass('active');
+      $('.director_iframe_content iframe').remove();
+    });
 
       // send to email
 //      $('.node_model .action_wrap .item_email').livequery('click', function(e){

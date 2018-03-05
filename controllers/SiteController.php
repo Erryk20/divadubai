@@ -818,9 +818,13 @@ class SiteController extends Controller
                     $model->save();
                 }
             }
-            \Yii::$app->session->setFlash('success', " Your Booking successfully sent!");
 
-            return $this->refresh();
+            if(\app\models\SendEmailMessage::Book($id_field)){
+                \Yii::$app->session->setFlash('success', "Your Booking successfully sent!");
+
+                return $this->refresh();
+            };
+            
         }
         
         return $this->render('book', [

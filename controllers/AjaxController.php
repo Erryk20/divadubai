@@ -600,7 +600,7 @@ class AjaxController extends Controller {
 //}
     
     public function actionTest(){
-        $temp = \app\models\UserInfo::sentMailForRegister("registration", 171);
+        $temp = \app\models\SendEmailMessage::Book('1506929317.7004');
         vd($temp);
 
 

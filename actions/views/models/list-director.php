@@ -58,24 +58,10 @@ $this->registerJsFile('/js/imagesloaded.pkgd.min.js', ['depends' => [JqueryAsset
                         </div>
                     </div>
                 <?php endforeach; ?>
-                <!--                    <div class="col col-md-3">
-                                        <div class="col_content">
-                                            <div class="video_vimeo pause" data-video="94832897"><img src="/images/director_2.png" alt="**.Atilio"></div>
-                                            <div class="name"><a href="#">**.Atilio</a></div>
-                                        </div>
-                                    </div>-->
                 <a href="<?= $url ?>" class="pagination__next"></a>
             </div>
         </div>
     </div>
-    <?php // vd($list, false); ?> 
-
-
-
-
-    <!--    <ul class="view_locations view_infinite">
-    <?php //= $this->render('@app/actions/views/models/infinite-scroll-director', ['list' => $list, 'url' => $url, 'urlCat' => $urlCat]) ?>
-        </ul>-->
     <div class="page-load-status">
         <div class="loader-ellips infinite-scroll-request">
             <span class="loader-ellips__dot"></span>

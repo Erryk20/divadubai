@@ -18,6 +18,8 @@ use yii\helpers\ArrayHelper;
  */
 class UserMedia extends \yii\db\ActiveRecord
 {
+    use \app\traits\TypeVideo;
+    
     public $file;
     public $files;
     public $link;
@@ -271,28 +273,6 @@ class UserMedia extends \yii\db\ActiveRecord
         
         return $result;
     }
-    
-    
-    public static function getTypeVideo($video_id){
-        
-        if(preg_match('/^\d+$/', trim($video_id), $match)){
-            return [
-                'type'=> 'vimeo',
-                'id'=> $match[0],
-                'src'=> "/images/user-media/{$video_id}",
-            ];
-        }
-        
-        if(preg_match('/^[\w|\-]+$/', trim($video_id), $match)){
-            return [
-                'type'=> 'youtube',
-                'id'=> $match[0],
-                'src'=> "/images/user-media/{$video_id}",
-            ];
-        }
-    } 
-
-
     
     public static function getImagesFromUser($info_user_id = false){
         $result = [

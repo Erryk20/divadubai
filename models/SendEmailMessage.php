@@ -70,6 +70,34 @@ class SendEmailMessage extends Model
     }
     
     
+    public static function Book($id_field){
+        
+        
+        $booking = Yii::$app->params['booking'];
+        $list = BookFieldsUser::getFieldsUser($id_field);
+        $theme = Yii::$app->controller->renderPartial('@app/mail/layouts/book');
+        
+        $rows = '';
+        $category = isset($list[0]) ? $list[0]['title'] : '';
+        
+        foreach ($list as $value) {
+            $rows .= "<tr><th>{$value['label']} : </th><td>{$value['value']}</td></tr>";
+        }
+        
+        $msg = str_replace('{{rows}}', $rows, $theme);
+        
+        $subject = "Enquiry From DIVA BOOKING - {$category} Form";
+        $from2 = 'book@new.divadubai.com';
+        $headers1 = "MIME-Version: 1.0\r\n";
+        $headers1 .= "Content-type: text/html; charset=UTF-8\r\n";
+        $headers1 .= "From: DIVA<$from2>";
+     
+        return  mail($booking, $subject, $msg, $headers1);
+    }
+
+
+
+
     public function sentMail($fromemai, $email, $subject, $message) {
         $headers = "MIME-Version: 1.0\r\nFrom: $fromemai\r\nReply-To: $fromemai\r\nContent-Type: text/html; charset=utf-8";
         $message = wordwrap($message, 70);

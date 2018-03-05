@@ -77,7 +77,7 @@ if(isset($_GET['t'])){
                                     <div class="field">
                                         <div class="form_checkboxes">
                                             <?php foreach ($value as $k => $item) : ?>
-                                                <?php if(!in_array($item, ['New face','Hair and Make'])) : ?> 
+                                                <?php if(!in_array($item, ['New face','Hair and Make', 'Hair & make'])) : ?> 
                                                     <div class="form_checkbox">
                                                         <?php 
                                                             if($filter['subcategory']){
