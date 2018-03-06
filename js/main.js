@@ -117,6 +117,20 @@ var temp;
       });
     }
 
+    if ($('.radio').length != 0){
+      $('.radio').livequery(function(){
+        var checkbox = $(this).find('input');
+        checkbox.click(function(){
+          if ($(this).prop('checked') == true){
+            $('.radio label').removeClass('active');
+            $(this).parents('.radio').find('label').addClass('active');
+          } else{
+            $(this).parents('.radio').find('label').removeClass('active');
+          }
+        });
+      });
+    }
+
     if ($('.model_slider2').length != 0){
       $(window).on('load', function () {
         setTimeout(function(){
