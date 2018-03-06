@@ -28,5 +28,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php endforeach; ?>
 </div>
 <div class="pagination-div">
-    <?= LinkPager::widget(['pagination' => $pages]);?>
+    <?php //= LinkPager::widget(['pagination' => $pages]);?>
 </div>

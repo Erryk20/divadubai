@@ -178,15 +178,15 @@ $this->registerJs("var orientation = {$orientation};", \yii\web\View::POS_END);
                 </div>
             <?php endif; ?>
 
-                <?php if(in_array('gender', $fields)): ?>
-                    <?php if(in_array('city', $fields)): ?>
-                        <?= $form->field($info, 'city', [
-                            'template' => "<label class='main_label col-md-2'>{$info->getAttributeLabel('gender')} *</label>{input}{error}",
-                            'options' => ['class' => 'form-group clearfix'],
-                        ])->checkboxList(UserInfo::itemGenderFromCategory($category_id), [
-                            'class'=>"field col-sm-9 col-md-10 form_checkboxes"
-                        ]);  ?> 
-                <?php endif; ?>
+                
+            <?php if(in_array('gender', $fields)): ?>
+                <?= $form->field($info, 'gender', [
+                    'template' => "<label class='main_label col-md-2'>{$info->getAttributeLabel('gender')} *</label>{input}{error}",
+                    'options' => ['class' => 'form-group clearfix'],
+                ])->radioList(UserInfo::itemGenderFromCategory($category_id), [
+                    'class'=>"field col-sm-9 col-md-10 form_checkboxes"
+                ]);  ?> 
+
             <?php endif; ?>
 
             <?php if(in_array('birth', $fields)): ?>
@@ -434,7 +434,7 @@ $this->registerJs("var orientation = {$orientation};", \yii\web\View::POS_END);
                 <?= $form->field($info, 'hair', [
                     'template' => "<label class='main_label col-md-2'>{$info->getAttributeLabel('hair')} *</label>{input}{error}",
                     'options' => ['class' => 'form-group clearfix'],
-                ])->checkboxList(UserInfo::itemAlias('hair'), [
+                ])->radioList(UserInfo::itemAlias('hair'), [
                     'class'=>"field col-sm-9 col-md-10 form_checkboxes"
                 ]);  ?> 
             <?php endif; ?>
@@ -452,7 +452,7 @@ $this->registerJs("var orientation = {$orientation};", \yii\web\View::POS_END);
                 <?= $form->field($info, 'eye', [
                     'template' => "<label class='main_label col-md-2'>{$info->getAttributeLabel('eye')} *</label>{input}{error}",
                     'options' => ['class' => 'form-group clearfix'],
-                ])->checkboxList(UserInfo::itemAlias('eye'), [
+                ])->radioList(UserInfo::itemAlias('eye'), [
                     'class'=>"field col-sm-9 col-md-10 form_checkboxes"
                 ]);  ?> 
             <?php endif; ?>

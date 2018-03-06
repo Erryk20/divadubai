@@ -6,3 +6,4 @@ nbproject
 public_html
 runtime
 _index.html
+config/db.php

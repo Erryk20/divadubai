@@ -615,7 +615,7 @@ class SiteController extends Controller
         $request = \Yii::$app->request;
         
         $page = (int) $request->get('page', 1);
-        $limit = $request->get('limit', 6);
+        $limit = $request->get('limit', 50);
         $offset = ($page == 1) ? 0 : ($limit * ($page-1));
         
         $count = \app\models\Casting::find()->count();
@@ -1128,6 +1128,13 @@ class SiteController extends Controller
             $info->user_id = $user_id;
         }
         
+//        $info->load(Yii::$app->request->post());
+//        vd($info);
+
+
+
+
+
         if ($info->load(Yii::$app->request->post()) && $info->validate($fields)) {
             
             $info->user_id = ($user_id != null) ? $user_id : '';
@@ -1582,34 +1589,30 @@ class SiteController extends Controller
         
         $content = \app\models\Content::findOne(['type'=>'clients', 'target_id'=>1]);
         
-        $page = (int) Yii::$app->request->get('page', 1);
-        $limit = \Yii::$app->request->get('limit', 32);
-        $offset = ($page == 1) ? 0 : ($limit * ($page-1));
-        
-        $count = (int)\app\models\Clients::find()->count();
-        
-        $pages = new \yii\data\Pagination([
-            'totalCount' => (int) $count, 
-            'pageSize' => $limit,
-        ]);
-        $pages->pageSizeParam = false;
+//        $page = (int) Yii::$app->request->get('page', 1);
+//        $limit = \Yii::$app->request->get('limit', 32);
+//        $offset = ($page == 1) ? 0 : ($limit * ($page-1));
+//        
+//        $count = (int)\app\models\Clients::find()->count();
+//        
+//        $pages = new \yii\data\Pagination([
+//            'totalCount' => (int) $count, 
+//            'pageSize' => $limit,
+//        ]);
+//        $pages->pageSizeParam = false;
         
         $modes = \app\models\Clients::find()
                 ->asArray()
-                ->orderBy('`order` ASC')
-                ->offset($offset)
-                ->limit($limit)
+//                ->orderBy('`order` ASC')
+//                ->offset($offset)
+//                ->limit($limit)
                 ->all();
                 
-//        vd($modes);
-
-
-
         return $this->render('clients', [
             'content' => $content,
             'modes' => $modes,
-            'limit' => $limit,
-            'pages' => $pages,
+//            'limit' => $limit,
+//            'pages' => $pages,
         ]);
     }
     

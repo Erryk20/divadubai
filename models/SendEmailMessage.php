@@ -71,8 +71,6 @@ class SendEmailMessage extends Model
     
     
     public static function Book($id_field){
-        
-        
         $booking = Yii::$app->params['booking'];
         $list = BookFieldsUser::getFieldsUser($id_field);
         $theme = Yii::$app->controller->renderPartial('@app/mail/layouts/book');
