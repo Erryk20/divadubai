@@ -9,7 +9,7 @@ if(isset($_GET['ip'])){
 }
 
 function debug() {
-    if (in_array($_SERVER["REMOTE_ADDR"], ['127.0.0.1', '46.164.190.101', '31.128.82.185']))
+    if (in_array($_SERVER["REMOTE_ADDR"], ['127.0.0.1', '46.164.190.101', '31.128.82.185', '37.53.228.38']))
         return true;
     else
         return false;

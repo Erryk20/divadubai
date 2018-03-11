@@ -8,6 +8,26 @@ use Yii;
 
 class AboutUsController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        // Пропускаєм тільки зареєстрованих користувачів
+                        'roles' => ['@'],
+                        // Пропускаєм тільки користавачів зі статусом адмін
+                        'matchCallback' => function ($rule, $action) {
+                            return Yii::$app->user->identity->role == 'admin';
+                        }
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     public function actionIndex()
     {
         $model = $this->findModel(12);

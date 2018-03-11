@@ -3,12 +3,33 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\Controller;
+use Yii;
 
 /**
  * Default controller for the `admin` module
  */
 class ItManagerController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        // Пропускаєм тільки зареєстрованих користувачів
+                        'roles' => ['@'],
+                        // Пропускаєм тільки користавачів зі статусом адмін
+                        'matchCallback' => function ($rule, $action) {
+                            return in_array(Yii::$app->user->identity->role, ['admin']);
+                        }
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     /**
      * Renders the index view for the module
      * @return string
@@ -25,8 +46,6 @@ class ItManagerController extends Controller
         
         $yearProgression = \app\models\Charts::getYearProgression();
 //        vd($yearProgression);
-        
-        
         
         return $this->render('index', [
             'genders' => $genders,

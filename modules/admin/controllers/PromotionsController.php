@@ -1,10 +1,31 @@
 <?php
 
 namespace app\modules\admin\controllers;
-
+use Yii;
 
 class PromotionsController extends \yii\web\Controller
 {
+    
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        // Пропускаєм тільки зареєстрованих користувачів
+                        'roles' => ['@'],
+                        // Пропускаєм тільки користавачів зі статусом адмін
+                        'matchCallback' => function ($rule, $action) {
+                            return Yii::$app->user->identity->role == 'admin';
+                        }
+                    ],
+                ],
+            ],
+        ];
+    }
+    
     public function actions() {
         return [
              'index' => [

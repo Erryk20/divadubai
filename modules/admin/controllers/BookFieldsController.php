@@ -32,6 +32,20 @@ class BookFieldsController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        // Пропускаєм тільки зареєстрованих користувачів
+                        'roles' => ['@'],
+                        // Пропускаєм тільки користавачів зі статусом адмін
+                        'matchCallback' => function ($rule, $action) {
+                            return in_array(Yii::$app->user->identity->role, ['admin']);
+                        }
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

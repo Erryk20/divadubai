@@ -216,7 +216,7 @@ class UserInfoSearch extends UserInfo
             'query' => $query,
 //            'pagination' => false,
              'pagination' => [
-                 'pagesize' => 200,
+                 'pagesize' => 20, //200
 //                'route' => '...',
 //                'params' => $params
             ]

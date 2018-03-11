@@ -35,7 +35,7 @@ class MainListController extends Controller
                         'roles' => ['@'],
                         // Пропускаєм тільки користавачів зі статусом адмін
                         'matchCallback' => function ($rule, $action) {
-                            return in_array(Yii::$app->user->identity->role, ['admin', 'user']);
+                            return Yii::$app->user->identity->role == 'admin';
                         }
                     ],
                 ],

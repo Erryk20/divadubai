@@ -135,7 +135,7 @@ $config = [
                 'sinc/<action>'=>'sinc/<action>',
                 
                 'admin'=>'admin/user-info',
-//                'admin/it-manager'=>'admin/default',
+                'admin/it-manager'=>'admin/it-manager',
                 'admin/register<category:(\w+)>'=>'admin/register',
                 'admin/<category:directors>'=>'admin/register',
                 'admin/<controler>'=>'admin/<controler>',
@@ -235,14 +235,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['127.0.0.1', '46.164.190.101', '31.128.82.185'],
+        'allowedIPs' => ['127.0.0.1', '46.164.190.101', '31.128.82.185', '37.53.228.38'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['127.0.0.1', '46.164.190.101', '31.128.82.185'],
+        'allowedIPs' => ['127.0.0.1', '46.164.190.101', '31.128.82.185', '37.53.228.38'],
     ];
 }
 
