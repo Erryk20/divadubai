@@ -18,8 +18,8 @@ use kartik\helpers\Html;
                                             <a href="<?= "{$domen}/profile/{$info['id']}" ?>">
                                                 <?= Html::img(
                                                         "{$domen}/". $this->render('@app/views/blocks/thumbnail-url-resize', 
-                                                            ['url' => Yii::getAlias("@webroot/{$list['logo']}"), 'width' => 510])
-                                                        // ['height'=>"640"]
+                                                            ['url' => Yii::getAlias("@webroot/{$list['logo']}"), 'width' => 510]),
+                                                        ['height'=>"634"]
                                                     );
                                                 
                                                 

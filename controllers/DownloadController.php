@@ -159,8 +159,8 @@ class DownloadController extends Controller {
         $pdf->destination = Pdf::DEST_DOWNLOAD;
         $pdf->content = $content;
         
-        $pdf->marginLeft = 3;
-        $pdf->marginRight = 3;
+        $pdf->marginLeft = 10;
+        $pdf->marginRight = 10;
         $pdf->marginTop = 1;
         $pdf->marginBottom = 1;
         $pdf->filename = "{$info['id']}.pdf";
